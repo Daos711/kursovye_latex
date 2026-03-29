@@ -1,0 +1,86 @@
+\section{Обзор литературы и теоретические основы}
+
+\subsection{Гидродинамическая теория смазки}
+
+Основой анализа подшипников скольжения является гидродинамическая теория смазки, заложенная в работах О.~Рейнольдса~\cite{pinkus}. Несущая способность смазочного слоя возникает вследствие вязкого течения жидкости в клиновом зазоре между вращающимся валом и неподвижной втулкой.
+
+Основные допущения~\cite{hamrock}: смазка~--- несжимаемая ньютоновская жидкость; течение ламинарное; инерционные силы пренебрежимо малы; толщина смазочного слоя мала по сравнению с радиусом ($c \ll R$); давление постоянно по толщине плёнки; отсутствует проскальзывание на границах.
+
+\subsection{Дискретный микрорельеф поверхностей трения}
+
+Технология лазерного текстурирования поверхностей получила широкое развитие~\cite{etsion2005}. Основные механизмы влияния микрорельефа~\cite{gropper2016, fowell2007}:
+
+\textbf{Микрогидродинамический эффект.} Каждое углубление создаёт локальный клиновый зазор с дополнительным гидродинамическим давлением.
+
+\textbf{Снижение сдвиговых напряжений.} Увеличение средней толщины смазочного слоя уменьшает градиент скорости и коэффициент трения.
+
+\textbf{Резервуары смазки.} Углубления обеспечивают подачу смазки при пуске и останове~\cite{galda2009}.
+
+Эффективность текстурирования зависит от формы, глубины, размеров и плотности расположения углублений~\cite{tala2012, brizmer2003, rahmani2007}.
+
+\subsection{Математическая модель}
+
+\subsubsection{Уравнение Рейнольдса}
+
+Для тонкого смазочного слоя несжимаемой жидкости~\cite{pinkus, hamrock}:
+\begin{equation}
+    \frac{\partial}{\partial x}\!\left(h^3 \frac{\partial p}{\partial x}\right) + \frac{\partial}{\partial z}\!\left(h^3 \frac{\partial p}{\partial z}\right) = 6\eta U \frac{\partial h}{\partial x}.
+    \label{eq:reynolds_dim}
+\end{equation}
+
+\subsubsection{Безразмерная форма}
+
+Вводя $\varphi = x/R$, $Z = z/L$, $H = h/c$, $P = pc^2/(6\eta U R)$:
+\begin{equation}
+    \frac{\partial}{\partial\varphi}\!\left(H^3 \frac{\partial P}{\partial\varphi}\right) + \alpha^2 \frac{\partial}{\partial Z}\!\left(H^3 \frac{\partial P}{\partial Z}\right) = \frac{\partial H}{\partial\varphi},
+    \quad \alpha^2 = \left(\frac{D}{L}\frac{\Delta\varphi}{\Delta Z}\right)^{\!2}.
+    \label{eq:reynolds_ndim}
+\end{equation}
+
+\subsubsection{Граничные условия}
+
+\begin{itemize}
+    \item Периодичность: $P(0, Z) = P(2\pi, Z)$.
+    \item Атмосферное давление: $P(\varphi, \pm 1) = 0$.
+    \item Кавитация (модель Гюмбеля): $P \geq 0$.
+\end{itemize}
+
+\subsubsection{Зазор с микрорельефом}
+
+\begin{equation}
+    H(\varphi, Z) = 1 + \varepsilon\cos\varphi + \textstyle\sum_k \Delta H_k(\varphi, Z),
+    \label{eq:clearance}
+\end{equation}
+где $\varepsilon = e/c$~--- относительный эксцентриситет, $\Delta H_k$~--- вклад $k$-го углубления (формулы для конкретного варианта~--- в расчётной части).
+
+\subsection{Численный метод решения}
+
+\subsubsection{Дискретизация}
+
+Метод конечных разностей на равномерной сетке $N_\varphi \times N_Z$:
+\begin{equation}
+    A_{i,j} P_{i,j+1} + B_{i,j} P_{i,j-1} + C_{i,j} P_{i+1,j} + D_{i,j} P_{i-1,j} - E_{i,j} P_{i,j} = F_{i,j},
+\end{equation}
+где $A = H_{j+\frac12}^3$, $B = H_{j-\frac12}^3$, $C = \alpha^2 H_{i+\frac12}^3$, $D = \alpha^2 H_{i-\frac12}^3$, $E = A+B+C+D$, $F = \Delta\varphi(H_{j+\frac12} - H_{j-\frac12})$.
+
+\subsubsection{Метод Гаусса--Зейделя с релаксацией}
+
+\begin{equation}
+    P_{i,j}^{(n+1)} = (1-\omega)\,P_{i,j}^{(n)} + \frac{\omega}{E_{i,j}} \bigl(A P_{i,j+1}^{(n)} + B P_{i,j-1}^{(n+1)} + C P_{i+1,j}^{(n)} + D P_{i-1,j}^{(n+1)} - F_{i,j}\bigr),
+\end{equation}
+где $\omega = 1.5$. После обновления: $P_{i,j}^{(n+1)} = \max(P_{i,j}^{(n+1)}, 0)$.
+
+Сходимость: $\delta = \sum|P^{(n+1)} - P^{(n)}| / (\sum|P^{(n+1)}| + 10^{-15}) < 10^{-5}$.
+
+\subsubsection{Интегральные характеристики}
+
+\textbf{Нагрузочная способность:}
+$F = p_{\text{м}} R L \sqrt{F_r^{*2} + F_t^{*2}} / 2$, где $F_r^* = \int\!\!\int P\cos\varphi\,d\varphi\,dZ$, $F_t^* = \int\!\!\int P\sin\varphi\,d\varphi\,dZ$.
+
+\textbf{Коэффициент трения:}
+$f^* = \int\!\!\int (1/H + 3H\,\partial P/\partial\varphi)\,d\varphi\,dZ$, \quad $\mu = f^* \eta U R L / (c F)$.
+
+\textbf{Расход смазки:}
+$Q^* = \int\!\!\int (H - \tfrac12 H^3 \partial P/\partial\varphi)\,d\varphi\,dZ$, \quad $Q = Q^* U c R$.
+
+\newpage

@@ -1,0 +1,9 @@
+# CPU-режим (обязательно)
+numpy>=1.24
+numba>=0.57
+matplotlib>=3.7
+joblib>=1.3
+
+# GPU-режим (опционально, требует NVIDIA CUDA)
+# pip install cupy-cuda12x
+# pip install -e ./reynolds_solver

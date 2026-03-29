@@ -1,0 +1,43 @@
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{listings,xcolor}
+\usepackage{hyperref}
+\usepackage{caption,subcaption}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{multirow,longtable,array,booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\geometry{left=30mm,right=15mm,top=20mm,bottom=20mm}
+\singlespacing
+\setlength{\parindent}{1.25cm}
+
+\titleformat{\section}{\Large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\setlist{nolistsep}
+
+\DeclareCaptionLabelFormat{gost}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\captionsetup[figure]{labelformat=gost,labelsep=endash,justification=centering}
+\captionsetup[table]{labelformat=gosttable,labelsep=endash,justification=justified,singlelinecheck=false}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},basicstyle=\ttfamily\footnotesize,
+    breaklines=true,captionpos=b,keepspaces=true,numbers=left,
+    numbersep=5pt,showstringspaces=false,tabsize=2,language=Python}
+\lstset{style=pythonstyle}
+
+\hypersetup{colorlinks=true,linkcolor=black,filecolor=black,urlcolor=blue,citecolor=black}

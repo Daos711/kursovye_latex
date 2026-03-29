@@ -1,0 +1,44 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Общая преамбула ---
+\input{../../shared/preamble}
+
+% --- Параметры варианта ---
+\input{config}
+
+\begin{document}
+
+% Титульный лист
+\input{../../shared/sections/titlepage}
+
+% Содержание
+\tableofcontents
+\newpage
+
+% Введение
+\input{../../shared/sections/introduction}
+
+% Глава 1. Теория (общая)
+\input{../../shared/sections/ch1_theory}
+
+% Глава 2. Расчётная часть (уникальная)
+\input{ch2_calculation}
+
+% Заключение
+\input{../../shared/sections/conclusion}
+
+% Библиография
+\input{../../shared/bibliography}
+
+% Приложения
+\appendix
+\section*{Приложение А. Листинг программы}
+\addcontentsline{toc}{section}{Приложение А. Листинг программы}
+
+\begin{lstlisting}[caption={Программа расчёта подшипника скольжения (фрагмент)}]
+# Запуск расчёта для варианта N:
+#   python run_variant.py N
+# Результаты сохраняются в variants/var_N/figures/
+\end{lstlisting}
+
+\end{document}

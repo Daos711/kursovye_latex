@@ -1,0 +1,119 @@
+\section{Расчётная часть}
+
+\subsection{Исходные данные (вариант \varNumber)}
+
+Расчёт выполняется для подшипника с геометрией~\varGeomLetter{} и микрорельефом типа~\varDimpleType{} (\varDimpleTypeName{}).
+
+\subsubsection{Геометрические параметры}
+
+\begin{itemize}
+    \item Радиус вала: $R = \varR$~м (\varRmm~мм)
+    \item Радиальный зазор: $c = \varC$~м (\varCmkm~мкм)
+    \item Длина подшипника: $L = \varL$~м (\varLmm~мм)
+    \item $L/D = \varLD$
+\end{itemize}
+
+\subsubsection{Параметры микрорельефа (\varDimpleTypeName)}
+
+Профиль углубления:
+\begin{equation}
+    \varDimpleFormula
+\end{equation}
+
+Параметры: $a = \varDimpleAmm$~мм, $b = \varDimpleBmm$~мм, $h_p = \varDimpleHpmkm$~мкм ($h_p/c = \varDimpleHpRatio$). Размещение: $N_\varphi = \varNphi$, $N_Z = \varNZ$, диапазон \varPhiRange.
+
+\subsubsection{Режимы работы}
+
+$n = \varN$~об/мин, $\eta = \varEta$~Па$\cdot$с, $\varepsilon = 0.05 \div 0.8$. Сетка $500 \times 500$, $\omega = 1.5$, $\delta < 10^{-5}$.
+
+\subsection{Результаты для гладкого подшипника}
+
+% TODO: раскомментировать \includegraphics после генерации графиков
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/smooth_pressure_2d.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2.5cm}Графики будут вставлены после расчёта\vspace{2.5cm}}}
+\caption{Распределение давления $P(\varphi)$ при $Z=0$ для гладкого подшипника ($\varepsilon = 0.6$)}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Характеристики гладкого подшипника}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
+\hline
+0.05 & --- & --- & --- \\
+\hline
+0.2 & --- & --- & --- \\
+\hline
+0.4 & --- & --- & --- \\
+\hline
+0.6 & --- & --- & --- \\
+\hline
+0.8 & --- & --- & --- \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Результаты для подшипника с микрорельефом}
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/textured_clearance_2d.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2.5cm}Графики будут вставлены после расчёта\vspace{2.5cm}}}
+\caption{Распределение зазора $H(\varphi)$ при $Z=0$ (\varDimpleTypeName, $\varepsilon = 0.6$)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/example_pressure_3d.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}3D-график давления\vspace{3cm}}}
+\caption{Трёхмерное распределение давления $P(\varphi, Z)$ ($\varepsilon = 0.6$)}
+\end{figure}
+
+\subsection{Сравнительный анализ}
+
+\begin{table}[H]
+\centering
+\caption{Сравнение характеристик при $\varepsilon = 0.6$}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Характеристика} & \textbf{Гладкий} & \textbf{С углублениями} & \textbf{$\Delta$, \%} \\
+\hline
+Нагрузка $F$, Н & --- & --- & --- \\
+\hline
+Коэфф. трения $\mu$ & --- & --- & --- \\
+\hline
+Расход $Q$, л/с & --- & --- & --- \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/example_load.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2.5cm}$F(\varepsilon)$\vspace{2.5cm}}}
+\caption{Нагрузочная способность в зависимости от эксцентриситета}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/example_friction.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2.5cm}$\mu(\varepsilon)$\vspace{2.5cm}}}
+\caption{Коэффициент трения в зависимости от эксцентриситета}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.85\textwidth]{figures/example_flow.png}
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{2.5cm}$Q(\varepsilon)$\vspace{2.5cm}}}
+\caption{Расход смазки в зависимости от эксцентриситета}
+\end{figure}
+
+\subsubsection{Физическая интерпретация}
+
+Нанесение \varDimpleTypeGenitive{} углублений приводит к увеличению несущей способности (микрогидродинамический эффект), снижению коэффициента трения (увеличение средней толщины плёнки) и росту расхода смазки (улучшение циркуляции и теплоотвода).
+
+\newpage
