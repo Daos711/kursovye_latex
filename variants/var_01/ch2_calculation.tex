@@ -10,9 +10,7 @@
 \label{tab:input_data}
 \begin{tabularx}{\textwidth}{|X|c|c|}
 \hline
-\textbf{Параметр} & \textbf{Значение} & \textbf{Размерность} \\
-\hline
-\multicolumn{3}{|l|}{Геометрия подшипника (геометрия \varGeomLetter)} \\
+\centering\textbf{Параметр} & \textbf{Значение} & \textbf{Размерность} \\
 \hline
 Радиус вала $R$ & \varRmm & мм \\
 \hline
@@ -21,8 +19,6 @@
 Длина подшипника $L$ & \varLmm & мм \\
 \hline
 Относительная длина $L/D$ & \varLD & -- \\
-\hline
-\multicolumn{3}{|l|}{Параметры микрорельефа (тип \varDimpleType{} -- \varDimpleTypeName)} \\
 \hline
 Полуось по оси $Z$, $a$ & \varDimpleAmm & мм \\
 \hline
@@ -38,15 +34,11 @@
 \hline
 Область текстурирования & \varPhiRange & -- \\
 \hline
-\multicolumn{3}{|l|}{Режим работы} \\
-\hline
 Частота вращения $n$ & \varN & об/мин \\
 \hline
 Вязкость смазки $\eta$ & \varEta & Па$\cdot$с \\
 \hline
 Диапазон эксцентриситета $\varepsilon$ & 0{,}05-0{,}80 & -- \\
-\hline
-\multicolumn{3}{|l|}{Параметры расчёта} \\
 \hline
 Размер сетки & $500 \times 500$ & -- \\
 \hline
@@ -94,11 +86,12 @@
 
 \begin{table}[H]
 \small
+\centering
 \caption{Характеристики гладкого подшипника при различных $\varepsilon$}
 \label{tab:smooth_results}
-\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{$\varepsilon$} & \textbf{$F$, Н} & \textbf{$\mu$} & \textbf{$Q$, л/с} \\
+$\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$, л/с} \\
 \hline
 0{,}05 & 259{,}5 & 0{,}2291 & 0{,}2398 \\
 \hline
@@ -116,7 +109,7 @@
 \hline
 0{,}80 & 12218{,}3 & 0{,}0087 & 0{,}2344 \\
 \hline
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 Из таблицы~\ref{tab:smooth_results} видно, что нагрузочная способность $F$ нелинейно возрастает с увеличением эксцентриситета: при переходе от $\varepsilon = 0{,}05$ к $\varepsilon = 0{,}80$ нагрузка увеличивается в 47 раз (с 259{,}5 до 12218{,}3~Н). Это обусловлено уменьшением минимального зазора $h_{\min} = c(1 - \varepsilon)$, что приводит к резкому росту гидродинамического давления.
@@ -164,11 +157,12 @@
 
 \begin{table}[H]
 \small
+\centering
 \caption{Характеристики подшипника с \varDimpleTypeGenitive{} углублениями при различных $\varepsilon$}
 \label{tab:textured_results}
-\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{$\varepsilon$} & \textbf{$F$, Н} & \textbf{$\mu$} & \textbf{$Q$, л/с} \\
+$\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$, л/с} \\
 \hline
 0{,}05 & 362{,}1 & 0{,}1623 & 0{,}2433 \\
 \hline
@@ -186,7 +180,7 @@
 \hline
 0{,}80 & 17139{,}1 & 0{,}0060 & 0{,}2374 \\
 \hline
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 Сравнивая таблицы~\ref{tab:smooth_results} и~\ref{tab:textured_results}, можно отметить, что при всех рассмотренных значениях $\varepsilon$ текстурированный подшипник обладает большей нагрузочной способностью и меньшим коэффициентом трения. Так, при $\varepsilon = 0{,}59$ нагрузка возрастает с 4764{,}4 до 5252{,}3~Н, а коэффициент трения снижается с 0{,}0160 до 0{,}0142.
@@ -203,9 +197,10 @@
 
 \begin{table}[H]
 \small
+\centering
 \caption{Сравнение характеристик гладкого и текстурированного подшипников при $\varepsilon = 0{,}6$}
 \label{tab:comparison}
-\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{Характеристика} & \textbf{Гладкий} & \textbf{С углублениями} & \textbf{$\Delta$, \%} \\
 \hline
@@ -215,7 +210,7 @@
 \hline
 Расход $Q$, л/с & 0{,}2359 & 0{,}2392 & $+1{,}43$ \\
 \hline
-\end{tabularx}
+\end{tabular}
 \end{table}
 
 Результаты, приведённые в таблице~\ref{tab:comparison}, свидетельствуют о следующем:
