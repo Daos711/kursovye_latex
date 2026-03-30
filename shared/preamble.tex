@@ -45,19 +45,23 @@
 \singlespacing
 \setlength{\parindent}{1.25cm}
 
-% --- Заголовки нумерованных разделов: с отступом, по левому краю ---
-\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
-\titlespacing*{\section}{\parindent}{2\baselineskip}{\baselineskip}
-\titlespacing*{\subsection}{\parindent}{\baselineskip}{\baselineskip}
-\titlespacing*{\subsubsection}{\parindent}{\baselineskip}{0.5\baselineskip}
+% --- Заголовки нумерованных разделов ---
+% [block] + \hspace: первая строка с отступом, продолжение без
+\titleformat{\section}[block]{\normalsize\bfseries}{\hspace{\parindent}\thesection}{0.5em}{}
+\titleformat{\subsection}[block]{\normalsize\bfseries}{\hspace{\parindent}\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}[block]{\normalsize\bfseries}{\hspace{\parindent}\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{\baselineskip}{0.5\baselineskip}
 
-% --- Заголовки ненумерованных разделов: по центру, жирные, заглавные ---
+% --- Заголовки ненумерованных разделов: по центру ---
 \titleformat{name=\section,numberless}{\normalsize\bfseries\centering}{}{0em}{}
 \titlespacing*{name=\section,numberless}{0pt}{2\baselineskip}{\baselineskip}
 
+% --- Перечисления: отступ только на первой строке, тире вместо точек ---
 \setlist{nolistsep}
+\setlist[enumerate]{wide, itemindent=\parindent, listparindent=0pt}
+\setlist[itemize]{wide, itemindent=\parindent, listparindent=0pt, label=--}
 
 % --- Название библиографии ---
 \renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}

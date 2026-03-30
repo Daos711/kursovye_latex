@@ -56,13 +56,22 @@
 
 \subsubsection{Интегральные характеристики}
 
-\textbf{Нагрузочная способность:}
-$F = p_{\text{м}} R L \sqrt{F_r^{*2} + F_t^{*2}} / 2$, где $F_r^* = \int\!\!\int P\cos\varphi\,d\varphi\,dZ$, $F_t^* = \int\!\!\int P\sin\varphi\,d\varphi\,dZ$.
+Нагрузочная способность:
+\begin{equation}
+    F = \frac{p_{\text{м}} R L}{2} \sqrt{F_r^{*2} + F_t^{*2}},
+\end{equation}
+где $F_r^* = \iint P\cos\varphi\,d\varphi\,dZ$, \; $F_t^* = \iint P\sin\varphi\,d\varphi\,dZ$.
 
-\textbf{Коэффициент трения:}
-$f^* = \int\!\!\int (1/H + 3H\,\partial P/\partial\varphi)\,d\varphi\,dZ$, \quad $\mu = f^* \eta U R L / (c F)$.
+Коэффициент трения:
+\begin{equation}
+    f^* = \iint \left(\frac{1}{H} + 3H\frac{\partial P}{\partial\varphi}\right) d\varphi\,dZ, \quad
+    \mu = \frac{f^* \eta U R L}{c F}.
+\end{equation}
 
-\textbf{Расход смазки:}
-$Q^* = \int\!\!\int (H - \tfrac12 H^3 \partial P/\partial\varphi)\,d\varphi\,dZ$, \quad $Q = Q^* U c R$.
+Расход смазки:
+\begin{equation}
+    Q^* = \iint \left(H - \frac{1}{2} H^3 \frac{\partial P}{\partial\varphi}\right) d\varphi\,dZ, \quad
+    Q = Q^* U c R.
+\end{equation}
 
 \newpage
