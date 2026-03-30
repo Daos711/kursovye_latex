@@ -18,14 +18,14 @@
 
 \vfill
 
-\noindent
-\begin{tabular}{@{}l@{\hspace{1.5cm}}c@{\hspace{1.5cm}}l@{}}
-Преподаватель & \rule{4cm}{0.4pt} & \varSupervisor \\
-              & {\small подпись, дата} & \\[1.2cm]
-Студент \varGroup\ifx\varStudentID\empty\else, \varStudentID\fi
-              & \rule{4cm}{0.4pt} & \varStudent \\
-              & {\small подпись, дата} & \\
+\begin{flushleft}
+\begin{tabular}{@{}l c r@{}}
+\makebox[5cm][l]{Руководитель} & \rule{4cm}{0.4pt} & \makebox[5cm][r]{\varSupervisor} \\
+ & {\scriptsize подпись, дата} & \\[1cm]
+\makebox[5cm][l]{Студент \varGroup} & \rule{4cm}{0.4pt} & \makebox[5cm][r]{\varStudent} \\
+ & {\scriptsize подпись, дата} & \\
 \end{tabular}
+\end{flushleft}
 
 \vfill
 
