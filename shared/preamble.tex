@@ -46,16 +46,16 @@
 \setlength{\parindent}{1.25cm}
 
 % --- Заголовки нумерованных разделов: с отступом 1,25 см ---
-\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\titleformat{\section}{\clearpage\normalsize\bfseries}{\thesection}{0.5em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
-\titlespacing*{\section}{\parindent}{2\baselineskip}{\baselineskip}
+\titlespacing*{\section}{\parindent}{0pt}{\baselineskip}
 \titlespacing*{\subsection}{\parindent}{\baselineskip}{\baselineskip}
 \titlespacing*{\subsubsection}{\parindent}{\baselineskip}{\baselineskip}
 
-% --- Заголовки ненумерованных разделов: по центру ---
-\titleformat{name=\section,numberless}{\normalsize\bfseries\centering}{}{0em}{}
-\titlespacing*{name=\section,numberless}{0pt}{2\baselineskip}{\baselineskip}
+% --- Заголовки ненумерованных разделов: по центру, с новой страницы ---
+\titleformat{name=\section,numberless}{\clearpage\normalsize\bfseries\centering}{}{0em}{}
+\titlespacing*{name=\section,numberless}{0pt}{0pt}{\baselineskip}
 
 % --- Перечисления: отступ только на первой строке, тире вместо точек ---
 \setlist{nolistsep}
