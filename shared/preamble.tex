@@ -45,20 +45,13 @@
 \singlespacing
 \setlength{\parindent}{1.25cm}
 
-% --- Заголовки нумерованных разделов ---
-% parshape: первая строка с отступом, продолжение по левому краю
-\titleformat{\section}[block]{\normalsize\bfseries}{}{0pt}{%
-  \parshape 2 \parindent \dimexpr\linewidth-\parindent\relax 0pt \linewidth
-  \thesection\hspace{0.5em}}
-\titleformat{\subsection}[block]{\normalsize\bfseries}{}{0pt}{%
-  \parshape 2 \parindent \dimexpr\linewidth-\parindent\relax 0pt \linewidth
-  \thesubsection\hspace{0.5em}}
-\titleformat{\subsubsection}[block]{\normalsize\bfseries}{}{0pt}{%
-  \parshape 2 \parindent \dimexpr\linewidth-\parindent\relax 0pt \linewidth
-  \thesubsubsection\hspace{0.5em}}
-\titlespacing*{\section}{0pt}{2\baselineskip}{\baselineskip}
-\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{\baselineskip}{0.5\baselineskip}
+% --- Заголовки нумерованных разделов: с отступом 1,25 см ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{\parindent}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{\parindent}{\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{\parindent}{\baselineskip}{0.5\baselineskip}
 
 % --- Заголовки ненумерованных разделов: по центру ---
 \titleformat{name=\section,numberless}{\normalsize\bfseries\centering}{}{0em}{}
@@ -67,7 +60,7 @@
 % --- Перечисления: отступ только на первой строке, тире вместо точек ---
 \setlist{nolistsep}
 \setlist[enumerate]{wide, itemindent=\parindent, listparindent=0pt}
-\setlist[itemize]{wide, itemindent=\parindent, listparindent=0pt, label=--}
+\setlist[itemize]{wide, itemindent=\parindent, listparindent=0pt, label=-}
 
 % --- Название библиографии ---
 \renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
