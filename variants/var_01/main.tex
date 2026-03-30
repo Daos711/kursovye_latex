@@ -25,20 +25,144 @@
 \input{ch2_calculation}
 
 % Заключение
-\input{../../shared/sections/conclusion}
+\input{conclusion}
 
 % Библиография
 \input{../../shared/bibliography}
 
 % Приложения
 \appendix
+\renewcommand{\thesection}{}
+\titleformat{\section}{\Large\bfseries\centering}{}{0em}{}
+
 \section*{Приложение А. Листинг программы}
 \addcontentsline{toc}{section}{Приложение А. Листинг программы}
 
-\begin{lstlisting}[caption={Программа расчёта подшипника скольжения (фрагмент)}]
-# Запуск расчёта для варианта N:
-#   python run_variant.py N
-# Результаты сохраняются в variants/var_N/figures/
+Ниже представлен фрагмент программы на языке Python, реализующей итерационное решение уравнения Рейнольдса методом Гаусса--Зейделя с верхней релаксацией.
+
+\begin{lstlisting}[caption={Gauss-Seidel solver for Reynolds equation (fragment)}]
+import numpy as np
+
+def gauss_seidel_solver(H, P, alpha2, omega, dphi, tol=1e-5):
+    """Solve Reynolds equation using Gauss-Seidel with SOR."""
+    Nphi, Nz = P.shape
+    for iteration in range(50000):
+        residual = 0.0
+        norm = 1e-15
+        for i in range(1, Nphi - 1):
+            for j in range(1, Nz - 1):
+                # Interpolate H at cell faces
+                He = 0.5 * (H[i,j] + H[i,j+1])
+                Hw = 0.5 * (H[i,j] + H[i,j-1])
+                Hn = 0.5 * (H[i,j] + H[i+1,j])
+                Hs = 0.5 * (H[i,j] + H[i-1,j])
+                # FDM coefficients
+                A = He**3;  B = Hw**3
+                C = alpha2 * Hn**3;  D = alpha2 * Hs**3
+                E = A + B + C + D
+                F = dphi * (He - Hw)
+                # Update with SOR
+                P_new = (A*P[i,j+1] + B*P[i,j-1]
+                       + C*P[i+1,j] + D*P[i-1,j] - F) / E
+                P_new = (1 - omega)*P[i,j] + omega*P_new
+                P_new = max(P_new, 0.0)  # Gumbel cavitation
+                residual += abs(P_new - P[i,j])
+                norm += abs(P_new)
+                P[i,j] = P_new
+        if residual / norm < tol:
+            break
+    return P, iteration
 \end{lstlisting}
+
+\begin{lstlisting}[caption={Clearance field with ellipsoidal dimples (fragment)}]
+def build_clearance(phi, Z, eps, dimples):
+    """Build clearance field H(phi, Z) with dimples."""
+    H = 1.0 + eps * np.cos(phi)
+    for (phi_c, z_c, a, b, hp_ratio) in dimples:
+        dphi = phi - phi_c
+        dz = Z - z_c
+        r2 = (dphi / b)**2 + (dz / a)**2
+        mask = r2 < 1.0
+        # Ellipsoidal profile
+        H[mask] += hp_ratio * np.sqrt(1.0 - r2[mask])
+    return H
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Integral characteristics computation (fragment)}]
+def compute_characteristics(P, H, phi, Z, params):
+    """Compute load F, friction mu, and flow Q."""
+    dphi = phi[0,1] - phi[0,0]
+    dz = Z[1,0] - Z[0,0]
+    # Load components
+    Fr = np.sum(P * np.cos(phi)) * dphi * dz
+    Ft = np.sum(P * np.sin(phi)) * dphi * dz
+    F_star = np.sqrt(Fr**2 + Ft**2)
+    # Dimensional load
+    R, L, c, eta, U = (params[k] for k in
+                        ['R','L','c','eta','U'])
+    p_scale = 6 * eta * U * R / c**2
+    F = p_scale * R * L * F_star / 2
+    # Friction
+    dPdphi = np.gradient(P, dphi, axis=1)
+    f_star = np.sum(1/H + 3*H*dPdphi) * dphi * dz
+    mu = f_star * eta * U * R * L / (c * F)
+    # Flow
+    Q_star = np.sum(H - 0.5*H**3 * dPdphi) * dphi * dz
+    Q = Q_star * U * c * R
+    return F, mu, Q
+\end{lstlisting}
+
+\newpage
+
+\section*{Приложение Б. Таблицы результатов}
+\addcontentsline{toc}{section}{Приложение Б. Таблицы результатов}
+
+В таблице представлены полные результаты расчёта интегральных характеристик подшипника для 15 значений эксцентриситета.
+
+\begin{longtable}{|c|c|c|c|c|c|c|}
+\caption{Полные результаты расчёта для варианта~\varNumber{} (\varDimpleTypeName, геометрия~\varGeomLetter)} \label{tab:full_results} \\
+\hline
+\multirow{2}{*}{$\varepsilon$} & \multicolumn{2}{c|}{$F$, Н} & \multicolumn{2}{c|}{$\mu$} & \multicolumn{2}{c|}{$Q$, л/с} \\
+\cline{2-7}
+ & Гладкий & Текстур. & Гладкий & Текстур. & Гладкий & Текстур. \\
+\hline
+\endfirsthead
+\hline
+\multirow{2}{*}{$\varepsilon$} & \multicolumn{2}{c|}{$F$, Н} & \multicolumn{2}{c|}{$\mu$} & \multicolumn{2}{c|}{$Q$, л/с} \\
+\cline{2-7}
+ & Гладкий & Текстур. & Гладкий & Текстур. & Гладкий & Текстур. \\
+\hline
+\endhead
+0{,}05 & 259{,}5 & 362{,}1 & 0{,}2291 & 0{,}1623 & 0{,}2398 & 0{,}2433 \\
+\hline
+0{,}10 & 540{,}9 & 626{,}7 & 0{,}1105 & 0{,}0942 & 0{,}2397 & 0{,}2431 \\
+\hline
+0{,}16 & 835{,}7 & 922{,}3 & 0{,}0722 & 0{,}0645 & 0{,}2395 & 0{,}2429 \\
+\hline
+0{,}21 & 1144{,}7 & 1242{,}2 & 0{,}0533 & 0{,}0485 & 0{,}2392 & 0{,}2427 \\
+\hline
+0{,}26 & 1478{,}5 & 1586{,}0 & 0{,}0420 & 0{,}0386 & 0{,}2389 & 0{,}2423 \\
+\hline
+0{,}32 & 1846{,}6 & 1977{,}7 & 0{,}0343 & 0{,}0315 & 0{,}2385 & 0{,}2419 \\
+\hline
+0{,}37 & 2261{,}3 & 2415{,}6 & 0{,}0287 & 0{,}0265 & 0{,}2380 & 0{,}2415 \\
+\hline
+0{,}43 & 2738{,}5 & 2927{,}3 & 0{,}0245 & 0{,}0225 & 0{,}2375 & 0{,}2410 \\
+\hline
+0{,}48 & 3286{,}8 & 3527{,}4 & 0{,}0211 & 0{,}0193 & 0{,}2370 & 0{,}2405 \\
+\hline
+0{,}53 & 3946{,}6 & 4289{,}3 & 0{,}0184 & 0{,}0165 & 0{,}2365 & 0{,}2399 \\
+\hline
+0{,}59 & 4764{,}4 & 5252{,}3 & 0{,}0160 & 0{,}0142 & 0{,}2360 & 0{,}2394 \\
+\hline
+0{,}64 & 5814{,}4 & 6587{,}5 & 0{,}0139 & 0{,}0120 & 0{,}2355 & 0{,}2389 \\
+\hline
+0{,}69 & 7222{,}5 & 8491{,}3 & 0{,}0120 & 0{,}0100 & 0{,}2351 & 0{,}2384 \\
+\hline
+0{,}75 & 9189{,}1 & 11558{,}4 & 0{,}0103 & 0{,}0080 & 0{,}2347 & 0{,}2379 \\
+\hline
+0{,}80 & 12218{,}3 & 17139{,}1 & 0{,}0087 & 0{,}0060 & 0{,}2344 & 0{,}2374 \\
+\hline
+\end{longtable}
 
 \end{document}
