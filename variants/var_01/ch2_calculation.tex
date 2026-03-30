@@ -75,7 +75,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/pressure_2d.png}
+\includegraphics[width=\textwidth]{figures/pressure_2d.png}
 \caption{Распределение давления $P(\varphi)$ при $Z=0$ для гладкого и текстурированного подшипников ($\varepsilon = 0{,}6$)}
 \label{fig:pressure_2d}
 \end{figure}
@@ -91,7 +91,7 @@
 \label{tab:smooth_results}
 \begin{tabular}{|c|c|c|c|}
 \hline
-$\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$, л/с} \\
+$\boldsymbol{\varepsilon}$ & $\boldsymbol{F}$\textbf{, Н} & $\boldsymbol{\mu}$ & $\boldsymbol{Q}$\textbf{, л/с} \\
 \hline
 0{,}05 & 259{,}5 & 0{,}2291 & 0{,}2398 \\
 \hline
@@ -124,7 +124,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/clearance_2d.png}
+\includegraphics[width=\textwidth]{figures/clearance_2d.png}
 \caption{Распределение зазора $H(\varphi)$ при $Z=0$ для подшипника с \varDimpleTypeGenitive{} углублениями ($\varepsilon = 0{,}6$)}
 \label{fig:clearance_2d}
 \end{figure}
@@ -135,7 +135,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/clearance_3d.png}
+\includegraphics[width=\textwidth]{figures/clearance_3d.png}
 \caption{Трёхмерное распределение зазора $H(\varphi, Z)$ для подшипника с \varDimpleTypeGenitive{} углублениями ($\varepsilon = 0{,}6$)}
 \label{fig:clearance_3d}
 \end{figure}
@@ -146,7 +146,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/pressure_3d.png}
+\includegraphics[width=\textwidth]{figures/pressure_3d.png}
 \caption{Трёхмерное распределение давления $P(\varphi, Z)$ для подшипника с \varDimpleTypeGenitive{} углублениями ($\varepsilon = 0{,}6$)}
 \label{fig:pressure_3d}
 \end{figure}
@@ -162,7 +162,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 \label{tab:textured_results}
 \begin{tabular}{|c|c|c|c|}
 \hline
-$\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$, л/с} \\
+$\boldsymbol{\varepsilon}$ & $\boldsymbol{F}$\textbf{, Н} & $\boldsymbol{\mu}$ & $\boldsymbol{Q}$\textbf{, л/с} \\
 \hline
 0{,}05 & 362{,}1 & 0{,}1623 & 0{,}2433 \\
 \hline
@@ -191,8 +191,6 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \subsection{Сравнительный анализ}
 
-\subsubsection{Сравнение при $\varepsilon = 0{,}6$}
-
 Для количественной оценки эффективности текстурирования в таблице~\ref{tab:comparison} представлены результаты сравнения при эксцентриситете $\varepsilon = 0{,}6$, соответствующем типичному рабочему режиму подшипника.
 
 \begin{table}[H]
@@ -202,7 +200,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 \label{tab:comparison}
 \begin{tabular}{|l|c|c|c|}
 \hline
-\textbf{Характеристика} & \textbf{Гладкий} & \textbf{С углублениями} & \textbf{$\Delta$, \%} \\
+\textbf{Характеристика} & \textbf{Гладкий} & \textbf{С углублениями} & $\boldsymbol{\Delta}$\textbf{, \%} \\
 \hline
 Нагрузка $F$, Н & 5028{,}5 & 5572{,}7 & $+10{,}82$ \\
 \hline
@@ -221,13 +219,11 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 Расход смазки. Объёмный расход увеличивается на 1{,}43\% (с 0{,}2359 до 0{,}2392~л/с). Рост расхода обусловлен увеличением эффективного сечения потока в зонах углублений. Умеренное увеличение расхода является положительным фактором, поскольку способствует улучшению теплоотвода и обновлению смазки в рабочем зазоре. При этом рост расхода незначителен и не приведёт к существенному увеличению требуемой производительности системы маслоснабжения.
 
-\subsubsection{Зависимости от эксцентриситета}
-
-На рисунках~\ref{fig:load_vs_eps}--\ref{fig:flow_vs_eps} представлены зависимости интегральных характеристик от эксцентриситета для обоих вариантов подшипника.
+На рисунках~\ref{fig:load_vs_eps}-\ref{fig:flow_vs_eps} представлены зависимости интегральных характеристик от эксцентриситета для обоих вариантов подшипника.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/load_vs_epsilon.png}
+\includegraphics[width=\textwidth]{figures/load_vs_epsilon.png}
 \caption{Нагрузочная способность $F(\varepsilon)$ для гладкого и текстурированного подшипников}
 \label{fig:load_vs_eps}
 \end{figure}
@@ -236,7 +232,7 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/friction_vs_epsilon.png}
+\includegraphics[width=\textwidth]{figures/friction_vs_epsilon.png}
 \caption{Коэффициент трения $\mu(\varepsilon)$ для гладкого и текстурированного подшипников}
 \label{fig:friction_vs_eps}
 \end{figure}
@@ -245,14 +241,12 @@ $\boldsymbol{\varepsilon}$ & \textbf{$F$, Н} & $\boldsymbol{\mu}$ & \textbf{$Q$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/flow_vs_epsilon.png}
+\includegraphics[width=\textwidth]{figures/flow_vs_epsilon.png}
 \caption{Расход смазки $Q(\varepsilon)$ для гладкого и текстурированного подшипников}
 \label{fig:flow_vs_eps}
 \end{figure}
 
 На рисунке~\ref{fig:flow_vs_eps} показано, что расход смазки текстурированного подшипника незначительно превышает расход гладкого во всём диапазоне $\varepsilon$. Разница составляет порядка $1 - 1{,}5$\% и практически не зависит от эксцентриситета. Обе кривые демонстрируют слабое убывание $Q$ с ростом $\varepsilon$, обусловленное уменьшением области положительного давления и ростом зоны кавитации.
-
-\subsubsection{Обобщение результатов}
 
 Проведённый анализ позволяет сформулировать следующие закономерности для подшипника с эллипсоидальными углублениями (геометрия~A, $R = 35$~мм, $c = 50$~мкм):
 
