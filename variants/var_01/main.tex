@@ -37,6 +37,8 @@
 
 % Приложения
 \appendix
+\renewcommand{\thetable}{Б.\arabic{table}}
+\setcounter{table}{0}
 
 \section*{ПРИЛОЖЕНИЕ А. ЛИСТИНГ ПРОГРАММЫ}
 \phantomsection
@@ -44,7 +46,7 @@
 
 Ниже представлен фрагмент программы на языке Python, реализующей итерационное решение уравнения Рейнольдса методом Гаусса-Зейделя с верхней релаксацией.
 
-\begin{lstlisting}[caption={Gauss-Seidel solver for Reynolds equation (fragment)}]
+\begin{lstlisting}[caption={Решатель Гаусса-Зейделя для уравнения Рейнольдса}]
 import numpy as np
 
 def gauss_seidel_solver(H, P, alpha2, omega, dphi, tol=1e-5):
@@ -78,7 +80,7 @@ def gauss_seidel_solver(H, P, alpha2, omega, dphi, tol=1e-5):
     return P, iteration
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Clearance field with ellipsoidal dimples (fragment)}]
+\begin{lstlisting}[caption={Формирование поля зазора с углублениями}]
 def build_clearance(phi, Z, eps, dimples):
     """Build clearance field H(phi, Z) with dimples."""
     H = 1.0 + eps * np.cos(phi)
@@ -92,7 +94,7 @@ def build_clearance(phi, Z, eps, dimples):
     return H
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Integral characteristics computation (fragment)}]
+\begin{lstlisting}[caption={Вычисление интегральных характеристик}]
 def compute_characteristics(P, H, phi, Z, params):
     """Compute load F, friction mu, and flow Q."""
     dphi = phi[0,1] - phi[0,0]
@@ -124,7 +126,7 @@ def compute_characteristics(P, H, phi, Z, params):
 
 \small
 \begin{longtable}{|c|c|c|c|c|c|c|}
-\caption{Полные результаты расчёта для варианта~\varNumber{} (\varDimpleTypeName, геометрия~\varGeomLetter)} \label{tab:full_results} \\
+\caption{Полные результаты расчёта для варианта~\varNumber} \label{tab:full_results} \\
 \hline
 \multirow{2}{*}{$\boldsymbol{\varepsilon}$} & \multicolumn{2}{c|}{$\boldsymbol{F}$\textbf{, Н}} & \multicolumn{2}{c|}{$\boldsymbol{\mu}$} & \multicolumn{2}{c|}{$\boldsymbol{Q}$\textbf{, л/с}} \\
 \cline{2-7}
