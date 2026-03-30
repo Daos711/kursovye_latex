@@ -71,7 +71,10 @@
 
 Расчётная область $\varphi \in [0, 2\pi]$, $Z \in [-1, 1]$ разбивается на равномерную сетку из $N_\varphi \times N_Z$ узлов с шагами $\Delta\varphi = 2\pi / N_\varphi$ и $\Delta Z = 2 / N_Z$~\cite{hamrock}. В каждом внутреннем узле $(i, j)$ уравнение~(\ref{eq:reynolds_ndim}) аппроксимируется методом конечных разностей второго порядка:
 \begin{equation}
-    A_{i,j} P_{i,j+1} + B_{i,j} P_{i,j-1} + C_{i,j} P_{i+1,j} + D_{i,j} P_{i-1,j} - E_{i,j} P_{i,j} = F_{i,j},
+    \begin{split}
+    A_{i,j} P_{i,j+1} + B_{i,j} P_{i,j-1} + C_{i,j} P_{i+1,j} + {} \\
+    + D_{i,j} P_{i-1,j} - E_{i,j} P_{i,j} = F_{i,j},
+    \end{split}
     \label{eq:fdm}
 \end{equation}
 
@@ -85,9 +88,12 @@
 
 \subsubsection{Метод Гаусса-Зейделя с релаксацией}
 
-Полученная система линейных алгебраических уравнений решается итерационным методом Гаусса-Зейделя с верхней релаксацией (метод SOR -- Successive Over-Relaxation)~\cite{hamrock}:
+Полученная система линейных алгебраических уравнений решается итерационным методом Гаусса-Зейделя с верхней релаксацией~\cite{hamrock}:
 \begin{equation}
-    P_{i,j}^{(n+1)} = (1-\omega)\,P_{i,j}^{(n)} + \frac{\omega}{E_{i,j}} \bigl(A P_{i,j+1}^{(n)} + B P_{i,j-1}^{(n+1)} + C P_{i+1,j}^{(n)} + D P_{i-1,j}^{(n+1)} - F_{i,j}\bigr),
+    \begin{split}
+    P_{i,j}^{(n+1)} = (1-\omega)\,P_{i,j}^{(n)} + \frac{\omega}{E_{i,j}} \bigl(A P_{i,j+1}^{(n)} + B P_{i,j-1}^{(n+1)} + {} \\
+    + C P_{i+1,j}^{(n)} + D P_{i-1,j}^{(n+1)} - F_{i,j}\bigr),
+    \end{split}
     \label{eq:sor}
 \end{equation}
 
