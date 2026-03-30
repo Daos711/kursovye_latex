@@ -5,58 +5,58 @@
 Расчёт выполняется для радиального подшипника скольжения с геометрией~\varGeomLetter{} и \varDimpleTypeGenitive{} микрорельефом. Сводные исходные данные представлены в таблице~\ref{tab:input_data}.
 
 \begin{table}[H]
-\centering
+\small
 \caption{Исходные данные для расчёта}
 \label{tab:input_data}
-\begin{tabular}{|l|c|}
+\begin{tabularx}{\textwidth}{|X|c|c|}
 \hline
-Параметр & Значение \\
+\textbf{Параметр} & \textbf{Значение} & \textbf{Размерность} \\
 \hline
-\multicolumn{2}{|l|}{Геометрия подшипника (геометрия \varGeomLetter)} \\
+\multicolumn{3}{|l|}{Геометрия подшипника (геометрия \varGeomLetter)} \\
 \hline
-Радиус вала $R$ & \varRmm~мм \\
+Радиус вала $R$ & \varRmm & мм \\
 \hline
-Радиальный зазор $c$ & \varCmkm~мкм \\
+Радиальный зазор $c$ & \varCmkm & мкм \\
 \hline
-Длина подшипника $L$ & \varLmm~мм \\
+Длина подшипника $L$ & \varLmm & мм \\
 \hline
-Относительная длина $L/D$ & \varLD \\
+Относительная длина $L/D$ & \varLD & -- \\
 \hline
-\multicolumn{2}{|l|}{Параметры микрорельефа (тип \varDimpleType{} -- \varDimpleTypeName)} \\
+\multicolumn{3}{|l|}{Параметры микрорельефа (тип \varDimpleType{} -- \varDimpleTypeName)} \\
 \hline
-Полуось по оси $Z$, $a$ & \varDimpleAmm~мм \\
+Полуось по оси $Z$, $a$ & \varDimpleAmm & мм \\
 \hline
-Полуось по оси $\varphi$, $b$ & \varDimpleBmm~мм \\
+Полуось по оси $\varphi$, $b$ & \varDimpleBmm & мм \\
 \hline
-Глубина углубления $h_p$ & \varDimpleHpmkm~мкм \\
+Глубина углубления $h_p$ & \varDimpleHpmkm & мкм \\
 \hline
-Относительная глубина $h_p/c$ & \varDimpleHpRatio \\
+Относительная глубина $h_p/c$ & \varDimpleHpRatio & -- \\
 \hline
-Число углублений по окружности $N_\varphi$ & \varNphi \\
+Число углублений по окружности $N_\varphi$ & \varNphi & шт. \\
 \hline
-Число рядов по длине $N_Z$ & \varNZ \\
+Число рядов по длине $N_Z$ & \varNZ & шт. \\
 \hline
-Область текстурирования & \varPhiRange \\
+Область текстурирования & \varPhiRange & -- \\
 \hline
-\multicolumn{2}{|l|}{Режим работы} \\
+\multicolumn{3}{|l|}{Режим работы} \\
 \hline
-Частота вращения $n$ & \varN~об/мин \\
+Частота вращения $n$ & \varN & об/мин \\
 \hline
-Вязкость смазки $\eta$ & \varEta~Па$\cdot$с \\
+Вязкость смазки $\eta$ & \varEta & Па$\cdot$с \\
 \hline
-Диапазон эксцентриситета $\varepsilon$ & 0{,}05-0{,}80 \\
+Диапазон эксцентриситета $\varepsilon$ & 0{,}05-0{,}80 & -- \\
 \hline
-\multicolumn{2}{|l|}{Параметры расчёта} \\
+\multicolumn{3}{|l|}{Параметры расчёта} \\
 \hline
-Размер сетки & $500 \times 500$ \\
+Размер сетки & $500 \times 500$ & -- \\
 \hline
-Параметр релаксации $\omega$ & 1{,}5 \\
+Параметр релаксации $\omega$ & 1{,}5 & -- \\
 \hline
-Критерий сходимости $\delta$ & $< 10^{-5}$ \\
+Критерий сходимости $\delta$ & $< 10^{-5}$ & -- \\
 \hline
-Макс. число итераций & 50000 \\
+Макс. число итераций & 50000 & -- \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 Профиль единичного углубления описывается формулой:
@@ -93,12 +93,12 @@
 Интегральные характеристики гладкого подшипника для выбранных значений эксцентриситета представлены в таблице~\ref{tab:smooth_results}.
 
 \begin{table}[H]
-\centering
+\small
 \caption{Характеристики гладкого подшипника при различных $\varepsilon$}
 \label{tab:smooth_results}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
 \hline
-$\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
+\textbf{$\varepsilon$} & \textbf{$F$, Н} & \textbf{$\mu$} & \textbf{$Q$, л/с} \\
 \hline
 0{,}05 & 259{,}5 & 0{,}2291 & 0{,}2398 \\
 \hline
@@ -116,7 +116,7 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 \hline
 0{,}80 & 12218{,}3 & 0{,}0087 & 0{,}2344 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 Из таблицы~\ref{tab:smooth_results} видно, что нагрузочная способность $F$ нелинейно возрастает с увеличением эксцентриситета: при переходе от $\varepsilon = 0{,}05$ к $\varepsilon = 0{,}80$ нагрузка увеличивается в 47 раз (с 259{,}5 до 12218{,}3~Н). Это обусловлено уменьшением минимального зазора $h_{\min} = c(1 - \varepsilon)$, что приводит к резкому росту гидродинамического давления.
@@ -163,12 +163,12 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 Интегральные характеристики подшипника с эллипсоидальными углублениями приведены в таблице~\ref{tab:textured_results}.
 
 \begin{table}[H]
-\centering
+\small
 \caption{Характеристики подшипника с \varDimpleTypeGenitive{} углублениями при различных $\varepsilon$}
 \label{tab:textured_results}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
 \hline
-$\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
+\textbf{$\varepsilon$} & \textbf{$F$, Н} & \textbf{$\mu$} & \textbf{$Q$, л/с} \\
 \hline
 0{,}05 & 362{,}1 & 0{,}1623 & 0{,}2433 \\
 \hline
@@ -186,7 +186,7 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 \hline
 0{,}80 & 17139{,}1 & 0{,}0060 & 0{,}2374 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 Сравнивая таблицы~\ref{tab:smooth_results} и~\ref{tab:textured_results}, можно отметить, что при всех рассмотренных значениях $\varepsilon$ текстурированный подшипник обладает большей нагрузочной способностью и меньшим коэффициентом трения. Так, при $\varepsilon = 0{,}59$ нагрузка возрастает с 4764{,}4 до 5252{,}3~Н, а коэффициент трения снижается с 0{,}0160 до 0{,}0142.
@@ -202,10 +202,10 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 Для количественной оценки эффективности текстурирования в таблице~\ref{tab:comparison} представлены результаты сравнения при эксцентриситете $\varepsilon = 0{,}6$, соответствующем типичному рабочему режиму подшипника.
 
 \begin{table}[H]
-\centering
+\small
 \caption{Сравнение характеристик гладкого и текстурированного подшипников при $\varepsilon = 0{,}6$}
 \label{tab:comparison}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
 \hline
 \textbf{Характеристика} & \textbf{Гладкий} & \textbf{С углублениями} & \textbf{$\Delta$, \%} \\
 \hline
@@ -215,7 +215,7 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 \hline
 Расход $Q$, л/с & 0{,}2359 & 0{,}2392 & $+1{,}43$ \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 Результаты, приведённые в таблице~\ref{tab:comparison}, свидетельствуют о следующем:
@@ -274,6 +274,7 @@ $\varepsilon$ & $F$, Н & $\mu$ & $Q$, л/с \\
 \end{enumerate}
 
 \subsection*{Выводы по главе 3}
+\phantomsection
 \addcontentsline{toc}{subsection}{Выводы по главе 3}
 
 Выполнен расчёт характеристик радиального подшипника скольжения с эллипсоидальным микрорельефом для 15 значений эксцентриситета. Получены поля давления и зазора, построены зависимости нагрузочной способности, коэффициента трения и расхода смазки от эксцентриситета. Сравнительный анализ при $\varepsilon = 0{,}6$ показал увеличение нагрузочной способности на $10{,}82$\%, снижение коэффициента трения на $11{,}78$\% и рост расхода на $1{,}43$\%, что подтверждает эффективность эллипсоидального текстурирования.
