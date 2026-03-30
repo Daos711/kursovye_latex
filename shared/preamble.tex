@@ -15,6 +15,28 @@
 \usepackage{multirow,longtable,array,booktabs}
 \usepackage{enumitem}
 \usepackage{titlesec}
+\usepackage{tocloft}
+
+% --- Оформление содержания ---
+\renewcommand{\cfttoctitlefont}{\hfill\normalsize\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftaftertoctitleskip}{1em}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cftsubsecpagefont}{\normalfont}
+\renewcommand{\cftsubsubsecfont}{\normalfont}
+\renewcommand{\cftsubsubsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftsecnumwidth}{1.5em}
+\setlength{\cftsubsecnumwidth}{2.3em}
+\setlength{\cftsubsubsecnumwidth}{3.2em}
+\setlength{\cftsecindent}{0em}
+\setlength{\cftsubsecindent}{1.5em}
+\setlength{\cftsubsubsecindent}{3.8em}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\setlength{\cftbeforesubsubsecskip}{0pt}
 
 \geometry{left=30mm,right=10mm,top=20mm,bottom=20mm}
 \singlespacing
