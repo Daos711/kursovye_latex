@@ -45,14 +45,13 @@
 \singlespacing
 \setlength{\parindent}{1.25cm}
 
-% --- Заголовки нумерованных разделов ---
-% [block] + \hspace: первая строка с отступом, продолжение без
-\titleformat{\section}[block]{\normalsize\bfseries}{\hspace*{\parindent}\thesection}{0.5em}{}
-\titleformat{\subsection}[block]{\normalsize\bfseries}{\hspace*{\parindent}\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}[block]{\normalsize\bfseries}{\hspace*{\parindent}\thesubsubsection}{0.5em}{}
-\titlespacing*{\section}{0pt}{2\baselineskip}{\baselineskip}
-\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{\baselineskip}{0.5\baselineskip}
+% --- Заголовки нумерованных разделов: с отступом 1,25 см ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{\parindent}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{\parindent}{\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{\parindent}{\baselineskip}{0.5\baselineskip}
 
 % --- Заголовки ненумерованных разделов: по центру ---
 \titleformat{name=\section,numberless}{\normalsize\bfseries\centering}{}{0em}{}
