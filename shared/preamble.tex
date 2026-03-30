@@ -17,6 +17,9 @@
 \usepackage{titlesec}
 \usepackage{tocloft}
 
+% --- Нумерация страниц: внизу по центру ---
+\pagestyle{plain}
+
 % --- Оформление содержания ---
 \renewcommand{\cfttoctitlefont}{\hfill\normalsize\bfseries}
 \renewcommand{\cftaftertoctitle}{\hfill\mbox{}}
@@ -42,10 +45,22 @@
 \singlespacing
 \setlength{\parindent}{1.25cm}
 
-\titleformat{\section}{\normalsize\bfseries\centering}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+% --- Заголовки нумерованных разделов: с отступом, по левому краю ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{\parindent}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{\parindent}{\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{\parindent}{\baselineskip}{0.5\baselineskip}
+
+% --- Заголовки ненумерованных разделов: по центру, жирные, заглавные ---
+\titleformat{name=\section,numberless}{\normalsize\bfseries\centering}{}{0em}{}
+\titlespacing*{name=\section,numberless}{0pt}{2\baselineskip}{\baselineskip}
+
 \setlist{nolistsep}
+
+% --- Название библиографии ---
+\renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
 
 \DeclareCaptionLabelFormat{gost}{Рисунок #2}
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2}

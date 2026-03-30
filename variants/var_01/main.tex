@@ -10,6 +10,7 @@
 
 % Титульный лист
 \input{../../shared/sections/titlepage}
+\setcounter{page}{2}
 
 % Содержание
 \renewcommand{\contentsname}{СОДЕРЖАНИЕ}
@@ -36,10 +37,8 @@
 
 % Приложения
 \appendix
-\renewcommand{\thesection}{}
-\titleformat{\section}{\normalsize\bfseries\centering}{}{0em}{}
 
-\section*{Приложение А. Листинг программы}
+\section*{ПРИЛОЖЕНИЕ А. ЛИСТИНГ ПРОГРАММЫ}
 \addcontentsline{toc}{section}{Приложение А. Листинг программы}
 
 Ниже представлен фрагмент программы на языке Python, реализующей итерационное решение уравнения Рейнольдса методом Гаусса--Зейделя с верхней релаксацией.
@@ -118,7 +117,7 @@ def compute_characteristics(P, H, phi, Z, params):
 
 \newpage
 
-\section*{Приложение Б. Таблицы результатов}
+\section*{ПРИЛОЖЕНИЕ Б. ТАБЛИЦЫ РЕЗУЛЬТАТОВ}
 \addcontentsline{toc}{section}{Приложение Б. Таблицы результатов}
 
 В таблице представлены полные результаты расчёта интегральных характеристик подшипника для 15 значений эксцентриситета.
