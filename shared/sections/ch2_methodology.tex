@@ -79,22 +79,73 @@
 
 \subsubsection{Дискретизация}
 
-Расчётная область $\varphi \in [0, 2\pi]$, $Z \in [-1, 1]$ разбивается на равномерную сетку из $N_\varphi \times N_Z$ узлов с шагами $\Delta\varphi = 2\pi / N_\varphi$ и $\Delta Z = 2 / N_Z$~\cite{hamrock}. В каждом внутреннем узле $(i, j)$ уравнение~(\ref{eq:reynolds_ndim}) аппроксимируется методом конечных разностей второго порядка:
+Для численного решения уравнения~(\ref{eq:reynolds_ndim}) необходимо:
+\begin{enumerate}
+    \item заменить дифференциальные операторы конечными разностями, что превращает уравнение в систему линейных алгебраических уравнений;
+    \item задать вычислительную сетку по двум независимым переменным $\varphi$ и $Z$ с выбранными шагами $\Delta\varphi$ и $\Delta Z$;
+    \item обеспечить применение граничных условий в дискретном виде;
+    \item реализовать итерационный процесс решения методом Гаусса-Зейделя с релаксацией.
+\end{enumerate}
+
+Расчётная область $\varphi \in [\varphi_1, \varphi_2]$, $Z \in [-1, 1]$ разбивается на $m$ частей по $\varphi$ и на $n$ частей по $Z$. Индексы $i$, $j$ выбираются так, что $0 \leq i \leq m$, $0 \leq j \leq n$. Шаги сетки:
+\begin{equation}
+    \Delta\varphi = \frac{\varphi_2 - \varphi_1}{m}, \quad \Delta Z = \frac{2}{n}.
+    \label{eq:grid_steps}
+\end{equation}
+
+Координаты узлов:
+\begin{equation}
+    \varphi_i = \varphi_1 + i\,\Delta\varphi, \quad Z_j = -1 + j\,\Delta Z.
+    \label{eq:grid_nodes}
+\end{equation}
+
+В узлах сетки хранятся приближённые значения давления и зазора: $P_{i,j} \approx P(\varphi_i, Z_j)$, $H_{i,j} \approx H(\varphi_i, Z_j)$.
+
+Для аппроксимации производных в уравнении~(\ref{eq:reynolds_ndim}) применяется центральная разностная схема второго порядка~\cite{hamrock}. Первое слагаемое левой части аппроксимируется следующим образом:
+\begin{equation}
+    \left[\frac{\partial}{\partial\varphi}\!\left(H^3 \frac{\partial P}{\partial\varphi}\right)\right]_{i,j} = \frac{1}{(\Delta\varphi)^2}\left[H_{i+\frac12,j}^3(P_{i+1,j} - P_{i,j}) - H_{i-\frac12,j}^3(P_{i,j} - P_{i-1,j})\right].
+    \label{eq:fdm_phi}
+\end{equation}
+
+Аналогично для производной по $Z$:
+\begin{equation}
+    \left[\frac{\partial}{\partial Z}\!\left(H^3 \frac{\partial P}{\partial Z}\right)\right]_{i,j} = \frac{1}{(\Delta Z)^2}\left[H_{i,j+\frac12}^3(P_{i,j+1} - P_{i,j}) - H_{i,j-\frac12}^3(P_{i,j} - P_{i,j-1})\right].
+    \label{eq:fdm_z}
+\end{equation}
+
+Правая часть уравнения аппроксимируется центральной разностью первого порядка:
+\begin{equation}
+    \left(\frac{\partial H}{\partial\varphi}\right)_{i,j} = \frac{H_{i+\frac12,j} - H_{i-\frac12,j}}{\Delta\varphi}.
+    \label{eq:fdm_rhs}
+\end{equation}
+
+В формулах~(\ref{eq:fdm_phi})-(\ref{eq:fdm_rhs}) фигурируют значения зазора $H$ в полуцелых узлах, которые вычисляются как средние арифметические соседних значений:
+\begin{equation}
+    H_{i+\frac12,j} = \frac{H_{i,j} + H_{i+1,j}}{2}, \quad H_{i-\frac12,j} = \frac{H_{i,j} + H_{i-1,j}}{2},
+    \label{eq:half_phi}
+\end{equation}
+\begin{equation}
+    H_{i,j+\frac12} = \frac{H_{i,j} + H_{i,j+1}}{2}, \quad H_{i,j-\frac12} = \frac{H_{i,j} + H_{i,j-1}}{2}.
+    \label{eq:half_z}
+\end{equation}
+
+Применение полуцелых узлов сохраняет второй порядок точности центральных разностей и обеспечивает физически корректное описание потока между узлами, повышая стабильность и точность численного решения~\cite{hamrock}.
+
+Подставляя выражения~(\ref{eq:fdm_phi})-(\ref{eq:fdm_rhs}) в уравнение~(\ref{eq:reynolds_ndim}) и выполняя преобразования, получаем систему линейных алгебраических уравнений:
 \begin{equation}
     \begin{split}
-    A_{i,j} P_{i,j+1} + B_{i,j} P_{i,j-1} + C_{i,j} P_{i+1,j} + {} \\
-    + D_{i,j} P_{i-1,j} - E_{i,j} P_{i,j} = F_{i,j},
+    A_{i,j} P_{i+1,j} + B_{i,j} P_{i-1,j} + C_{i,j} P_{i,j+1} + {} \\
+    + D_{i,j} P_{i,j-1} - E_{i,j} P_{i,j} = F_{i,j},
     \end{split}
     \label{eq:fdm}
 \end{equation}
 
-\noindent где $A = H_{j+\frac12}^3$ -- коэффициент при давлении в узле справа (по $\varphi$);\\
-\hphantom{где }$B = H_{j-\frac12}^3$ -- коэффициент при давлении в узле слева;\\
-\hphantom{где }$C = \alpha^2 H_{i+\frac12}^3$ -- коэффициент при давлении в узле сверху (по $Z$);\\
-\hphantom{где }$D = \alpha^2 H_{i-\frac12}^3$ -- коэффициент при давлении в узле снизу;\\
-\hphantom{где }$E = A + B + C + D$ -- диагональный коэффициент;\\
-\hphantom{где }$F = \Delta\varphi(H_{j+\frac12} - H_{j-\frac12})$ -- правая часть (источник давления);\\
-\hphantom{где }$H_{j+\frac12} = (H_{i,j} + H_{i,j+1})/2$ -- значение зазора на грани между узлами.
+\noindent где $A_{i,j} = H_{i+\frac12,j}^3$;\\
+\hphantom{где }$B_{i,j} = H_{i-\frac12,j}^3$;\\
+\hphantom{где }$C_{i,j} = \alpha^2 H_{i,j+\frac12}^3$;\\
+\hphantom{где }$D_{i,j} = \alpha^2 H_{i,j-\frac12}^3$;\\
+\hphantom{где }$E_{i,j} = A_{i,j} + B_{i,j} + C_{i,j} + D_{i,j}$;\\
+\hphantom{где }$F_{i,j} = \Delta\varphi(H_{i+\frac12,j} - H_{i-\frac12,j})$.
 
 \subsubsection{Метод Гаусса-Зейделя с релаксацией}
 

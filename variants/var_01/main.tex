@@ -37,90 +37,12 @@
 
 % Приложения
 \appendix
-\renewcommand{\thetable}{Б.\arabic{table}}
+\renewcommand{\thetable}{А.\arabic{table}}
 \setcounter{table}{0}
 
-\section*{ПРИЛОЖЕНИЕ А. ЛИСТИНГ ПРОГРАММЫ}
+\section*{ПРИЛОЖЕНИЕ А. ТАБЛИЦЫ РЕЗУЛЬТАТОВ}
 \phantomsection
-\addcontentsline{toc}{section}{Приложение А. Листинг программы}
-
-Ниже представлен фрагмент программы на языке Python, реализующей итерационное решение уравнения Рейнольдса методом Гаусса-Зейделя с верхней релаксацией.
-
-\begin{lstlisting}[caption={Решатель Гаусса-Зейделя для уравнения Рейнольдса}]
-import numpy as np
-
-def gauss_seidel_solver(H, P, alpha2, omega, dphi, tol=1e-5):
-    """Solve Reynolds equation using Gauss-Seidel with SOR."""
-    Nphi, Nz = P.shape
-    for iteration in range(50000):
-        residual = 0.0
-        norm = 1e-15
-        for i in range(1, Nphi - 1):
-            for j in range(1, Nz - 1):
-                # Interpolate H at cell faces
-                He = 0.5 * (H[i,j] + H[i,j+1])
-                Hw = 0.5 * (H[i,j] + H[i,j-1])
-                Hn = 0.5 * (H[i,j] + H[i+1,j])
-                Hs = 0.5 * (H[i,j] + H[i-1,j])
-                # FDM coefficients
-                A = He**3;  B = Hw**3
-                C = alpha2 * Hn**3;  D = alpha2 * Hs**3
-                E = A + B + C + D
-                F = dphi * (He - Hw)
-                # Update with SOR
-                P_new = (A*P[i,j+1] + B*P[i,j-1]
-                       + C*P[i+1,j] + D*P[i-1,j] - F) / E
-                P_new = (1 - omega)*P[i,j] + omega*P_new
-                P_new = max(P_new, 0.0)  # Gumbel cavitation
-                residual += abs(P_new - P[i,j])
-                norm += abs(P_new)
-                P[i,j] = P_new
-        if residual / norm < tol:
-            break
-    return P, iteration
-\end{lstlisting}
-
-\begin{lstlisting}[caption={Формирование поля зазора с углублениями}]
-def build_clearance(phi, Z, eps, dimples):
-    """Build clearance field H(phi, Z) with dimples."""
-    H = 1.0 + eps * np.cos(phi)
-    for (phi_c, z_c, a, b, hp_ratio) in dimples:
-        dphi = phi - phi_c
-        dz = Z - z_c
-        r2 = (dphi / b)**2 + (dz / a)**2
-        mask = r2 < 1.0
-        # Ellipsoidal profile
-        H[mask] += hp_ratio * np.sqrt(1.0 - r2[mask])
-    return H
-\end{lstlisting}
-
-\begin{lstlisting}[caption={Вычисление интегральных характеристик}]
-def compute_characteristics(P, H, phi, Z, params):
-    """Compute load F, friction mu, and flow Q."""
-    dphi = phi[0,1] - phi[0,0]
-    dz = Z[1,0] - Z[0,0]
-    # Load components
-    Fr = np.sum(P * np.cos(phi)) * dphi * dz
-    Ft = np.sum(P * np.sin(phi)) * dphi * dz
-    F_star = np.sqrt(Fr**2 + Ft**2)
-    # Dimensional load
-    R, L, c, eta, U = (params[k] for k in
-                        ['R','L','c','eta','U'])
-    p_scale = 6 * eta * U * R / c**2
-    F = p_scale * R * L * F_star / 2
-    # Friction
-    dPdphi = np.gradient(P, dphi, axis=1)
-    f_star = np.sum(1/H + 3*H*dPdphi) * dphi * dz
-    mu = f_star * eta * U * R * L / (c * F)
-    # Flow
-    Q_star = np.sum(H - 0.5*H**3 * dPdphi) * dphi * dz
-    Q = Q_star * U * c * R
-    return F, mu, Q
-\end{lstlisting}
-
-\section*{ПРИЛОЖЕНИЕ Б. ТАБЛИЦЫ РЕЗУЛЬТАТОВ}
-\phantomsection
-\addcontentsline{toc}{section}{Приложение Б. Таблицы результатов}
+\addcontentsline{toc}{section}{Приложение А. Таблицы результатов}
 
 В таблице представлены полные результаты расчёта интегральных характеристик подшипника для 15 значений эксцентриситета.
 
