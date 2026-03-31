@@ -103,13 +103,19 @@
 
 Для аппроксимации производных в уравнении~(\ref{eq:reynolds_ndim}) применяется центральная разностная схема второго порядка~\cite{hamrock}. Первое слагаемое левой части аппроксимируется следующим образом:
 \begin{equation}
-    \left[\frac{\partial}{\partial\varphi}\!\left(H^3 \frac{\partial P}{\partial\varphi}\right)\right]_{i,j} = \frac{1}{(\Delta\varphi)^2}\left[H_{i+\frac12,j}^3(P_{i+1,j} - P_{i,j}) - H_{i-\frac12,j}^3(P_{i,j} - P_{i-1,j})\right].
+    \begin{split}
+    \left[\frac{\partial}{\partial\varphi}\!\left(H^3 \frac{\partial P}{\partial\varphi}\right)\right]_{i,j} = \frac{1}{(\Delta\varphi)^2}\Big[H_{i+\frac12,j}^3(P_{i+1,j} - P_{i,j}) - {} \\
+    - H_{i-\frac12,j}^3(P_{i,j} - P_{i-1,j})\Big].
+    \end{split}
     \label{eq:fdm_phi}
 \end{equation}
 
 Аналогично для производной по $Z$:
 \begin{equation}
-    \left[\frac{\partial}{\partial Z}\!\left(H^3 \frac{\partial P}{\partial Z}\right)\right]_{i,j} = \frac{1}{(\Delta Z)^2}\left[H_{i,j+\frac12}^3(P_{i,j+1} - P_{i,j}) - H_{i,j-\frac12}^3(P_{i,j} - P_{i,j-1})\right].
+    \begin{split}
+    \left[\frac{\partial}{\partial Z}\!\left(H^3 \frac{\partial P}{\partial Z}\right)\right]_{i,j} = \frac{1}{(\Delta Z)^2}\Big[H_{i,j+\frac12}^3(P_{i,j+1} - P_{i,j}) - {} \\
+    - H_{i,j-\frac12}^3(P_{i,j} - P_{i,j-1})\Big].
+    \end{split}
     \label{eq:fdm_z}
 \end{equation}
 
