@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[14pt,a4paper]{extarticle}
 
 % --- Общая преамбула ---
 \input{../../shared/preamble}
@@ -10,35 +10,87 @@
 
 % Титульный лист
 \input{../../shared/sections/titlepage}
+\setcounter{page}{2}
 
 % Содержание
+\renewcommand{\contentsname}{СОДЕРЖАНИЕ}
 \tableofcontents
 \newpage
 
 % Введение
 \input{../../shared/sections/introduction}
 
-% Глава 1. Теория (общая)
+% Глава 1. Обзор литературы и теоретические основы
 \input{../../shared/sections/ch1_theory}
 
-% Глава 2. Расчётная часть (уникальная)
+% Глава 2. Методология
+\input{../../shared/sections/ch2_methodology}
+
+% Глава 3. Результаты моделирования (уникальная)
 \input{ch2_calculation}
 
 % Заключение
-\input{../../shared/sections/conclusion}
+\input{conclusion}
 
 % Библиография
 \input{../../shared/bibliography}
 
 % Приложения
 \appendix
-\section*{Приложение А. Листинг программы}
-\addcontentsline{toc}{section}{Приложение А. Листинг программы}
+\renewcommand{\thetable}{А.\arabic{table}}
+\setcounter{table}{0}
 
-\begin{lstlisting}[caption={Программа расчёта подшипника скольжения (фрагмент)}]
-# Запуск расчёта для варианта N:
-#   python run_variant.py N
-# Результаты сохраняются в variants/var_N/figures/
-\end{lstlisting}
+\section*{ПРИЛОЖЕНИЕ А. ТАБЛИЦЫ РЕЗУЛЬТАТОВ}
+\phantomsection
+\addcontentsline{toc}{section}{Приложение А. Таблицы результатов}
+
+В таблице представлены полные результаты расчёта интегральных характеристик подшипника для 15 значений эксцентриситета.
+
+\small
+\begin{longtable}{|c|c|c|c|c|c|c|}
+\caption{Полные результаты расчёта для варианта~\varNumber} \label{tab:full_results} \\
+\hline
+\multirow{2}{*}{$\boldsymbol{\varepsilon}$} & \multicolumn{2}{c|}{$\boldsymbol{F}$\textbf{, Н}} & \multicolumn{2}{c|}{$\boldsymbol{\mu}$} & \multicolumn{2}{c|}{$\boldsymbol{Q}$\textbf{, л/с}} \\
+\cline{2-7}
+ & \textbf{Гладк.} & \textbf{Текст.} & \textbf{Гладк.} & \textbf{Текст.} & \textbf{Гладк.} & \textbf{Текст.} \\
+\hline
+\endfirsthead
+\hline
+\multirow{2}{*}{$\boldsymbol{\varepsilon}$} & \multicolumn{2}{c|}{$\boldsymbol{F}$\textbf{, Н}} & \multicolumn{2}{c|}{$\boldsymbol{\mu}$} & \multicolumn{2}{c|}{$\boldsymbol{Q}$\textbf{, л/с}} \\
+\cline{2-7}
+ & \textbf{Гладк.} & \textbf{Текст.} & \textbf{Гладк.} & \textbf{Текст.} & \textbf{Гладк.} & \textbf{Текст.} \\
+\hline
+\endhead
+0{,}05 & 551{,}5 & 609{,}3 & 0{,}2245 & 0{,}2023 & 0{,}6852 & 0{,}6888 \\
+\hline
+0{,}10 & 1149{,}5 & 1221{,}6 & 0{,}1083 & 0{,}1014 & 0{,}6848 & 0{,}6884 \\
+\hline
+0{,}16 & 1775{,}8 & 1857{,}8 & 0{,}0707 & 0{,}0672 & 0{,}6843 & 0{,}6878 \\
+\hline
+0{,}21 & 2432{,}6 & 2526{,}2 & 0{,}0523 & 0{,}0501 & 0{,}6835 & 0{,}6871 \\
+\hline
+0{,}26 & 3141{,}8 & 3249{,}7 & 0{,}0412 & 0{,}0396 & 0{,}6825 & 0{,}6861 \\
+\hline
+0{,}32 & 3924{,}0 & 4050{,}6 & 0{,}0336 & 0{,}0324 & 0{,}6813 & 0{,}6849 \\
+\hline
+0{,}37 & 4805{,}2 & 4957{,}0 & 0{,}0282 & 0{,}0271 & 0{,}6801 & 0{,}6836 \\
+\hline
+0{,}43 & 5819{,}4 & 6006{,}5 & 0{,}0240 & 0{,}0231 & 0{,}6787 & 0{,}6822 \\
+\hline
+0{,}48 & 6984{,}6 & 7222{,}0 & 0{,}0207 & 0{,}0199 & 0{,}6772 & 0{,}6808 \\
+\hline
+0{,}53 & 8386{,}5 & 8737{,}9 & 0{,}0180 & 0{,}0171 & 0{,}6758 & 0{,}6792 \\
+\hline
+0{,}59 & 10124{,}4 & 10609{,}3 & 0{,}0157 & 0{,}0148 & 0{,}6744 & 0{,}6778 \\
+\hline
+0{,}64 & 12355{,}7 & 13016{,}3 & 0{,}0136 & 0{,}0128 & 0{,}6730 & 0{,}6764 \\
+\hline
+0{,}69 & 15347{,}9 & 16417{,}7 & 0{,}0118 & 0{,}0109 & 0{,}6717 & 0{,}6751 \\
+\hline
+0{,}75 & 19527{,}1 & 21498{,}1 & 0{,}0101 & 0{,}0091 & 0{,}6706 & 0{,}6738 \\
+\hline
+0{,}80 & 25964{,}3 & 29831{,}7 & 0{,}0085 & 0{,}0073 & 0{,}6698 & 0{,}6729 \\
+\hline
+\end{longtable}
 
 \end{document}
